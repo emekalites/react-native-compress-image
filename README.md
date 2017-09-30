@@ -1,6 +1,6 @@
 # React Native Native Compress
-<!-- [![npm version](https://badge.fury.io/js/react-native-compress-image.svg)](https://badge.fury.io/js/react-native-compress-image)
-[![npm downloads](https://img.shields.io/npm/dt/react-native-compress-image.svg)](https://badge.fury.io/js/react-native-compress-image) -->
+[![npm version](https://badge.fury.io/js/react-native-compress-image.svg)](https://badge.fury.io/js/react-native-compress-image)
+[![npm downloads](https://img.shields.io/npm/dt/react-native-compress-image.svg)](https://badge.fury.io/js/react-native-compress-image)
 
 React Native Compress Image for Android
 
