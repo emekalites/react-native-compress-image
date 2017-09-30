@@ -1,4 +1,4 @@
-# React Native Native Compress
+# React Native Compress Image
 [![npm version](https://badge.fury.io/js/react-native-compress-image.svg)](https://badge.fury.io/js/react-native-compress-image)
 [![npm downloads](https://img.shields.io/npm/dt/react-native-compress-image.svg)](https://badge.fury.io/js/react-native-compress-image)
 
@@ -20,14 +20,23 @@ In your `AndroidManifest.xml`
 ```xml
 <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-
 ```
 
 In `android/settings.gradle`
 ```gradle
-
 include ':react-native-compress-image'
 project(':react-native-compress-image').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-compress-image/android')
+```
+
+in `android/app/build.gradle`
+```java
+dependencies {
+    compile project(':react-native-compress-image')  // <--- Add package to dependencies
+    compile fileTree(dir: "libs", include: ["*.jar"])
+    compile "com.android.support:appcompat-v7:23.0.1"
+    compile "com.facebook.react:react-native:+"
+    ....
+}
 ```
 
 in `MainApplication.java`:
@@ -69,7 +78,7 @@ CompressImage.createCompressedImage(imageUri, newWidth, newHeight, appDirectory)
   // inspect err to get more details.
 });
 ```
-### Sample app
+## Sample App
 
 A basic, sample app is available in [the `example` folder](https://github.com/bamlab/react-native-compress-image/tree/master/example). It uses the module to compress a photo from the Camera Roll.
 
