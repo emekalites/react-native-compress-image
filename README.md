@@ -80,7 +80,7 @@ CompressImage.createCompressedImage(imageUri, newWidth, newHeight, appDirectory)
 ```
 ## Sample App
 
-A basic, sample app is available in [the `example` folder](https://github.com/bamlab/react-native-compress-image/tree/master/example). It uses the module to compress a photo from the Camera Roll.
+A basic, sample app is available in [the `example` folder](https://github.com/emekalites/react-native-compress-image/tree/master/example). It uses the module to compress a photo from the Camera Roll.
 
 ## API
 
