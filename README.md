@@ -33,7 +33,7 @@ include ':react-native-compress-image'
 project(':react-native-compress-image').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-compress-image/android')
 ```
 
-Manually register module in `MainApplication.java` (if you did not use `react-native link`):
+in `MainApplication.java`:
 
 ```java
 import com.emekalites.react.compress.image.ImageCompressPackage;  // <--- Import Package
