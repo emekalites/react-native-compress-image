@@ -18,16 +18,13 @@ React Native Compress Image for Android
 
 In your `AndroidManifest.xml`
 ```xml
-    .....
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-     .....
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
 ```
 
 In `android/settings.gradle`
 ```gradle
-...
 
 include ':react-native-compress-image'
 project(':react-native-compress-image').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-compress-image/android')
@@ -54,8 +51,6 @@ public class MainApplication extends Application implements ReactApplication {
         );
       }
   };
-
-  ....
 }
 ```
 
