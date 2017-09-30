@@ -1,0 +1,27 @@
+{
+	"name": "react-native-compress-image",
+	"version": "0.0.1",
+	"description": "compress image in react-native",
+	"main": "index.js",
+	"scripts": {
+	  "test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"bugs": {
+	  "url": "https://github.com/emekalites/react-native-compress-image/issues"
+	},
+	"repository": {
+	  "type": "git",
+	  "url": "git+https://github.com/emekalites/react-native-compress-image.git"
+	},
+	"keywords": [
+	  "react-native",
+	  "react",
+	  "android",
+	  "ios",
+	  "image",
+	  "compress"
+	],
+	"author": "Chukwuemeka Ihedoro <caihedoro@gmail.com> (http://chukwuemeka.ihedoro.com)",
+	"homepage": "https://github.com/emekalites/react-native-compress-image",
+	"license": "MIT"
+}
