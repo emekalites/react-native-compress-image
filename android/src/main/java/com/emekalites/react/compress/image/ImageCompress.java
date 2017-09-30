@@ -26,11 +26,11 @@ import java.io.IOException;
  * Created by emnity on 9/29/17.
  */
 
-public class CompressImage {
-    private static final String TAG = CompressImage.class.getSimpleName();
+public class ImageCompress {
+    private static final String TAG = ImageCompress.class.getSimpleName();
     private Context mContext;
 
-    public CompressImage(Application context) {
+    public ImageCompress(Application context) {
         mContext = context;
     }
 

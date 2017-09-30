@@ -15,11 +15,11 @@ import java.io.IOException;
 
 public class ImageCompressModule extends ReactContextBaseJavaModule {
     private final static String TAG = ImageCompressModule.class.getCanonicalName();
-    private CompressImage compressImage;
+    private ImageCompress compressImage;
 
     public ImageCompressModule(ReactApplicationContext reactContext) {
         super(reactContext);
-        compressImage = new CompressImage((Application) reactContext.getApplicationContext());
+        compressImage = new ImageCompress((Application) reactContext.getApplicationContext());
     }
 
     @Override
@@ -40,7 +40,7 @@ public class ImageCompressModule extends ReactContextBaseJavaModule {
         String compressedImage = compressImage.doCompressImage(imageString, directoryPath, newWidth, newHeight);
 
         if (compressedImage != "") {
-            File imageFile = new File(compressImage.getRealPathFromURI(Uri.parse(compressedImage)));
+            File imageFile = new File(compressImage.getRealPathFromURI(compressedImage));
 
             WritableMap response = Arguments.createMap();
             response.putString("path", imageFile.getAbsolutePath());
