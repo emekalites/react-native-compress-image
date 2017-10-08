@@ -42,7 +42,7 @@ public class ImageCompressModule extends ReactContextBaseJavaModule {
     }
 
     private void createCompressedImageWithExceptions(String image, String directoryPath, final Callback successCb, final Callback failureCb) throws IOException {
-        File imageFile = new ImageCompress(this)
+        File imageFile = new ImageCompress(mContext)
                     .setDestinationDirectoryPath(Environment.getExternalStorageDirectory().getPath())
                     .compressToFile(new File(uriPath.getRealPathFromURI(Uri.parse(image))), directoryPath);
 
@@ -70,7 +70,7 @@ public class ImageCompressModule extends ReactContextBaseJavaModule {
     }
 
     private void createCustomCompressedImageWithExceptions(String image, String directoryPath, int maxWidth, int maxHeight, int quality, final Callback successCb, final Callback failureCb) throws IOException {
-        File imageFile = new ImageCompress(this)
+        File imageFile = new ImageCompress(mContext)
                     .setMaxWidth(maxWidth)
                     .setMaxHeight(maxHeight)
                     .setQuality(quality)
