@@ -68,7 +68,17 @@ public class MainApplication extends Application implements ReactApplication {
 ```javascript
 import CompressImage from 'react-native-compress-image';
 
-CompressImage.createCompressedImage(imageUri, newWidth, newHeight, appDirectory).then((response) => {
+CompressImage.createCompressedImage(imageUri, appDirectory).then((response) => {
+  // response.uri is the URI of the new image that can now be displayed, uploaded...
+  // response.path is the path of the new image
+  // response.name is the name of the new image with the extension
+  // response.size is the size of the new image
+}).catch((err) => {
+  // Oops, something went wrong. Check that the filename is correct and
+  // inspect err to get more details.
+});
+
+CompressImage.createCustomCompressedImage(imageUri, appDirectory, maxWidth, maxHeight, quality).then((response) => {
   // response.uri is the URI of the new image that can now be displayed, uploaded...
   // response.path is the path of the new image
   // response.name is the name of the new image with the extension
@@ -84,13 +94,27 @@ A basic, sample app is available in [the `example` folder](https://github.com/em
 
 ## API
 
-### `promise createCompressedImage(imageUri, newWidth, newHeight, appDirectory)`
+### `promise createCompressedImage(imageUri, appDirectory)`
 
 The promise resolves with an object containing: `path`, `uri`, `name` and `size` of the new file. The URI can be used directly as the `source` of an [`<Image>`](https://facebook.github.io/react-native/docs/image.html) component.
 
 Option | Description
 ------ | -----------
 imageUri | Path of image file whether jpeg or png
-newWidth | Image width
-newHeight | Image height
-appDirectory | The folder or path to save the compressed image.
+appDirectory | The folder or path to save the compressed image
+
+### `promise createCustomCompressedImage(imageUri, appDirectory, maxWidth, maxHeight, quality)`
+
+The promise resolves with an object containing: `path`, `uri`, `name` and `size` of the new file. The URI can be used directly as the `source` of an [`<Image>`](https://facebook.github.io/react-native/docs/image.html) component.
+
+Option | Description
+------ | -----------
+imageUri | Path of image file whether jpeg or png
+appDirectory | The folder or path to save the compressed image
+maxWidth | Image maximum width
+maxHeight | Image maximum height
+quality | Image quality
+
+## Credits
+
+[https://github.com/zetbaitsu/Compressor](https://github.com/zetbaitsu/Compressor)

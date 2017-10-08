@@ -13,3 +13,8 @@ npm-debug.log
 yarn-error.log
 
 ios
+android/*.iml
+android/gradle/*
+android/local.properties
+android/gradlew.bat
+android/gradlew

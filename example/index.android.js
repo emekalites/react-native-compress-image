@@ -73,7 +73,7 @@ export default class compress extends Component {
   }
 
   resize() {
-    CompressImage.createCompressedImage(this.state.image.uri, 400, 400, 'Compress/Images')
+    CompressImage.createCompressedImage(this.state.image.uri, 'Compress/Images')
     .then(({uri}) => {
       console.log(uri);
       this.setState({

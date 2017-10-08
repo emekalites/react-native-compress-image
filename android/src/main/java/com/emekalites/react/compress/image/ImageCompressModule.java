@@ -1,7 +1,10 @@
 package com.emekalites.react.compress.image;
 
 import android.app.Application;
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Environment;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
@@ -15,11 +18,13 @@ import java.io.IOException;
 
 public class ImageCompressModule extends ReactContextBaseJavaModule {
     private final static String TAG = ImageCompressModule.class.getCanonicalName();
-    private ImageCompress compressImage;
+    private UriPath uriPath;
+    private Context mContext;
 
     public ImageCompressModule(ReactApplicationContext reactContext) {
         super(reactContext);
-        compressImage = new ImageCompress((Application) reactContext.getApplicationContext());
+        mContext = reactContext.getApplicationContext();
+        uriPath = new UriPath((Application) mContext);
     }
 
     @Override
@@ -28,20 +33,52 @@ public class ImageCompressModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void createCompressedImage(String imagePath, int newWidth, int newHeight, String directoryPath, final Callback successCb, final Callback failureCb) {
+    public void createCompressedImage(String imagePath, String directoryPath, final Callback successCb, final Callback failureCb) {
         try {
-            createCompressedImageWithExceptions(imagePath, newWidth, newHeight, directoryPath, successCb, failureCb);
+            createCompressedImageWithExceptions(imagePath, directoryPath, successCb, failureCb);
         } catch (IOException e) {
             failureCb.invoke(e.getMessage());
         }
     }
 
-    private void createCompressedImageWithExceptions(String imageString, int newWidth, int newHeight, String directoryPath, final Callback successCb, final Callback failureCb) throws IOException {
-        String compressedImage = compressImage.doCompressImage(imageString, directoryPath, newWidth, newHeight);
+    private void createCompressedImageWithExceptions(String image, String directoryPath, final Callback successCb, final Callback failureCb) throws IOException {
+        File imageFile = new ImageCompress(this)
+                    .setDestinationDirectoryPath(Environment.getExternalStorageDirectory().getPath())
+                    .compressToFile(new File(uriPath.getRealPathFromURI(Uri.parse(image))), directoryPath);
 
-        if (compressedImage != "") {
-            File imageFile = new File(compressImage.getRealPathFromURI(compressedImage));
+        if (imageFile != null) {
+            WritableMap response = Arguments.createMap();
+            response.putString("path", imageFile.getAbsolutePath());
+            response.putString("uri", Uri.fromFile(imageFile).toString());
+            response.putString("name", imageFile.getName());
+            response.putDouble("size", imageFile.length());
 
+            // Invoke success
+            successCb.invoke(response);
+        } else {
+            failureCb.invoke("Error getting compressed image path");
+        }
+    }
+
+    @ReactMethod
+    public void createCustomCompressedImage(String imagePath, String directoryPath, int maxWidth, int maxHeight, int quality, final Callback successCb, final Callback failureCb) {
+        try {
+            createCustomCompressedImageWithExceptions(imagePath, directoryPath, maxWidth, maxHeight, quality, successCb, failureCb);
+        } catch (IOException e) {
+            failureCb.invoke(e.getMessage());
+        }
+    }
+
+    private void createCustomCompressedImageWithExceptions(String image, String directoryPath, int maxWidth, int maxHeight, int quality, final Callback successCb, final Callback failureCb) throws IOException {
+        File imageFile = new ImageCompress(this)
+                    .setMaxWidth(maxWidth)
+                    .setMaxHeight(maxHeight)
+                    .setQuality(quality)
+                    .setCompressFormat(Bitmap.CompressFormat.JPEG)
+                    .setDestinationDirectoryPath(Environment.getExternalStorageDirectory().getPath())
+                    .compressToFile(new File(uriPath.getRealPathFromURI(Uri.parse(image))), directoryPath);
+
+        if (imageFile != null) {
             WritableMap response = Arguments.createMap();
             response.putString("path", imageFile.getAbsolutePath());
             response.putString("uri", Uri.fromFile(imageFile).toString());
