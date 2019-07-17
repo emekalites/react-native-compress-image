@@ -27,7 +27,10 @@ public class ImageUtil {
         try {
             fileOutputStream = new FileOutputStream(destinationPath);
             // write the compressed bitmap at the destination specified by destinationPath.
-            decodeSampledBitmapFromFile(imageFile, reqWidth, reqHeight).compress(compressFormat, quality, fileOutputStream);
+            Bitmap responseBitmap = decodeSampledBitmapFromFile(imageFile, reqWidth, reqHeight);
+            if(responseBitmap != null) {
+                responseBitmap.compress(compressFormat, quality, fileOutputStream);
+            }
         } finally {
             if (fileOutputStream != null) {
                 fileOutputStream.flush();
